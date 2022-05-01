@@ -1,5 +1,5 @@
 import React from "react";
-import products from "../products";
+import products from "../resources/products";
 import Product from "../components/Product";
 
 const HomeScreen = () => {
