@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
     Row,
@@ -9,13 +9,27 @@ import {
     Button,
     ListGroupItem,
 } from "react-bootstrap";
+import axios from "axios";
 
 import Rating from "../components/Rating";
-import products from "../resources/products";
+// import products from "../resources/products";
 
 const ProductScreen = ({ match }) => {
     const productID = useParams().id;
-    const product = products.find((product) => product._id === productID);
+
+    const [product, setProduct] = useState({});
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const { data } = await axios.get(`/api/product/${productID}`);
+            setProduct(data);
+        };
+        fetchProduct();
+    });
+
+    // These lines are only used for testing front-end
+    // const productID = useParams().id;
+    // const product = products.find((product) => product._id === productID);
+
     return (
         <React.Fragment>
             <Link className='btn btn-dark my-3' to='/'>
@@ -23,7 +37,7 @@ const ProductScreen = ({ match }) => {
             </Link>
             <Row>
                 <Col md={6}>
-                    <Image scr={product.image} alt={product.name} fluid />
+                    <Image src={product.image} alt={product.name} fluid />
                 </Col>
                 <Col md={3}>
                     <ListGroup variant='flush'>

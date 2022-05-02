@@ -1,1 +1,18 @@
-{}
+{
+    "name": "20520018_hethongweb",
+    "version": "1.0.0",
+    "description": "Demo Project using MERN stack",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon .\\backend\\server.js"
+    },
+    "author": "Kiet Vu",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.16"
+    }
+}
