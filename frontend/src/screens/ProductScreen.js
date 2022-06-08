@@ -11,13 +11,13 @@ import {
     Form,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 
 import Rating from "../components/Rating";
 // import products from "../resources/products";
 import { listProductDetails } from "../actions/productActions";
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = () => {
     const productID = useParams().id;
     const navigate = useNavigate();
 
