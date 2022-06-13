@@ -9,6 +9,7 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen.js";
 import ProfileScreen from "./screens/ProfileScreen.js";
 import UserListScreen from "./screens/UserListScreen";
+import UserEditScreen from "./screens/UserEditScreen";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -32,6 +33,10 @@ const App = () => {
                         <Route
                             path='/admin/userlist'
                             element={<UserListScreen />}
+                        />
+                        <Route
+                            path='/admin/user/:id/edit'
+                            element={<UserEditScreen />}
                         />
                         <Route path='/' element={<HomeScreen />} exact />
                     </Routes>

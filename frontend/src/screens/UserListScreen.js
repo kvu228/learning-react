@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
@@ -26,7 +26,7 @@ const UserListScreen = () => {
         } else {
             navigate("/login");
         }
-    }, [dispatch, successDelete]);
+    }, [dispatch, successDelete, userInfo, navigate]);
 
     const deleteHandler = (id) => {
         if (window.confirm("Are you sure?")) {
@@ -58,13 +58,14 @@ const UserListScreen = () => {
                                 <td>{user.name}</td>
                                 <td>
                                     {" "}
-                                    <a href={`mailto:${user.email}`}></a>
-                                    {user.email}
+                                    <a href={`mailto:${user.email}`}>
+                                        {user.email}
+                                    </a>
                                 </td>
                                 <td>
                                     {user.isAdmin ? (
                                         <i
-                                            className='fas fa-checked'
+                                            className='fas fa-check'
                                             style={{ color: "green" }}
                                         />
                                     ) : (
@@ -76,7 +77,7 @@ const UserListScreen = () => {
                                 </td>
                                 <td>
                                     <LinkContainer
-                                        to={`/user/${user._id}/edit`}
+                                        to={`/admin/user/${user._id}/edit`}
                                     >
                                         <Button
                                             variant='primary'

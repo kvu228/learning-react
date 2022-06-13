@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
     Form,
     Button,
@@ -14,7 +14,6 @@ import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import Message from "../components/Message";
 
 const ProfileScreen = () => {
-    const location = useLocation();
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
@@ -25,7 +24,7 @@ const ProfileScreen = () => {
 
     const dispatch = useDispatch();
     const userDetails = useSelector((state) => state.userDetails);
-    const { loading, error, user } = userDetails;
+    const { error, user } = userDetails;
 
     const userLogin = useSelector((state) => state.userLogin);
     const { userInfo } = userLogin;
@@ -44,7 +43,7 @@ const ProfileScreen = () => {
                 setEmail(user.email);
             }
         }
-    }, [dispatch, user, userInfo]);
+    }, [dispatch, user, userInfo, navigate]);
 
     const submitHandler = (e) => {
         e.preventDefault();
