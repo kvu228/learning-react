@@ -35,13 +35,19 @@ const UserListScreen = () => {
     };
     return (
         <div>
-            <h2>Users</h2>
+            <h2 className='my-3'>Users</h2>
             {loading ? (
                 <Loader />
             ) : error ? (
                 <Message variant='danger'>{error}</Message>
             ) : (
-                <Table striped bordered hover responsive className='table-sm'>
+                <Table
+                    striped
+                    bordered
+                    hover
+                    responsive
+                    className='table-sm align-middle'
+                >
                     <thead>
                         <tr>
                             <th>ID</th>
