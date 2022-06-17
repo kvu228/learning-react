@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 import {
     Form,
     Button,
@@ -8,10 +9,13 @@ import {
     FormGroup,
     FormLabel,
     FormControl,
+    Table,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import { listMyOrders } from "../actions/orderActions";
 import Message from "../components/Message";
+import Loader from "../components/Loader";
 
 const ProfileScreen = () => {
     const navigate = useNavigate();
@@ -32,12 +36,16 @@ const ProfileScreen = () => {
     const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
     const { success } = userUpdateProfile;
 
+    const orderMyList = useSelector((state) => state.orderMyList);
+    const { loading: loadingOrders, error: errorOrders, orders } = orderMyList;
+
     useEffect(() => {
         if (!userInfo) {
             navigate("/login");
         } else {
             if (!user.name) {
                 dispatch(getUserDetails("profile"));
+                dispatch(listMyOrders());
             } else {
                 setName(user.name);
                 setEmail(user.email);
@@ -115,6 +123,70 @@ const ProfileScreen = () => {
             </Col>
             <Col md={9}>
                 <h3>My Orders</h3>
+                {loadingOrders ? (
+                    <Loader />
+                ) : errorOrders ? (
+                    <Message variant='danger'>{error}</Message>
+                ) : (
+                    <Table
+                        striped
+                        bordered
+                        hover
+                        responsive
+                        className='table table-sm'
+                    >
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Paid</th>
+                                <th>Delivered</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {orders.map((order) => (
+                                <tr key={order._id}>
+                                    <td>{order._id}</td>
+                                    <td>{order.createdAt}</td>
+                                    <td>{order.totalPrice}</td>
+                                    <td>
+                                        {order.isPaid ? (
+                                            order.paidAt
+                                        ) : (
+                                            <i
+                                                className='fas fa-times'
+                                                style={{ color: "red" }}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        {order.isDelivered ? (
+                                            order.deliveredAt
+                                        ) : (
+                                            <i
+                                                className='fas fa-times'
+                                                style={{ color: "red" }}
+                                            />
+                                        )}
+                                    </td>
+                                    <td>
+                                        <LinkContainer
+                                            to={`/orders/${order._id}`}
+                                        >
+                                            <Button
+                                                variant='dark'
+                                                className='btn-sm'
+                                            >
+                                                Details
+                                            </Button>
+                                        </LinkContainer>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                )}
             </Col>
         </Row>
     );

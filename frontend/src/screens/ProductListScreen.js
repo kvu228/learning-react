@@ -48,6 +48,7 @@ const ProductListScreen = () => {
         } else {
             dispatch(listProducts());
         }
+        // eslint-disable-next-line
     }, [
         dispatch,
         navigate,

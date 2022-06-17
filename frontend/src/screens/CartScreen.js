@@ -24,6 +24,9 @@ const CartScreen = () => {
     const cart = useSelector((state) => state.cart);
     const { cartItems } = cart;
 
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
     const dispatch = useDispatch();
     useEffect(() => {
         if (productID) {
@@ -36,7 +39,11 @@ const CartScreen = () => {
     };
 
     const checkOutHandler = () => {
-        navigate("/login?redirect=shipping");
+        if (userInfo) {
+            navigate("/shipping");
+        } else {
+            navigate("/login?redirect=shipping");
+        }
     };
 
     return (
@@ -107,7 +114,13 @@ const CartScreen = () => {
                                         </Button>
                                     </Col>
                                     <Col>
-                                        <b>{item.qty * item.price}</b>
+                                        <b>
+                                            {Number(
+                                                (item.qty * item.price).toFixed(
+                                                    2
+                                                )
+                                            )}
+                                        </b>
                                     </Col>
                                 </Row>
                             </ListGroupItem>
