@@ -8,6 +8,8 @@ import {
     updateProduct,
     createProductReview,
     getTopProducts,
+    getProductsByCategory,
+    getCategories,
 } from "../controllers/productController.js";
 
 import { protect, isAdmin } from "../middleware/authMiddleware.js";
@@ -18,6 +20,8 @@ const router = express.Router();
 //@route    GET /api/prodtucts
 //@access   Public
 router.route("/").get(getProducts).post(protect, isAdmin, createProduct);
+router.route("/category").get(getProductsByCategory);
+router.route("/getCategories").get(getCategories);
 router.get("/top", getTopProducts);
 router.route("/:id/reviews").post(protect, createProductReview);
 

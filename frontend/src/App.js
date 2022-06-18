@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ProductsByCategory from "./screens/ProductsByCategory";
 
 import CartScreen from "./screens/CartScreen";
 import ShippingScreen from "./screens/ShippingScreen";
@@ -70,6 +71,11 @@ const App = () => {
                         <Route
                             path='/admin/productlist'
                             element={<ProductListScreen />}
+                        />
+
+                        <Route
+                            path='/products/category/:category'
+                            element={<ProductsByCategory />}
                         />
                         <Route
                             path='/admin/products/:id/edit'

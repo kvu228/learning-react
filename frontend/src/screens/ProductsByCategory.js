@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-// import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -8,40 +7,28 @@ import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Paginate from "../components/Paginate";
-import ProductCarousel from "../components/ProductCarousel";
 import CategorySelector from "../components/CategorySelector";
-import { listProducts } from "../actions/productActions";
 
-// This line is only used for testing front-end
-// import products from "../resources/products";
+import { listProductsCategory } from "../actions/productActions";
 
-const HomeScreen = () => {
-    //Those lines are used to fetch products from DB to Frontend
-    // const [products, setProducts] = useState([]);
-    // useEffect(() => {
-    //     const fetchProducts = async () => {
-    //         const { data } = await axios.get("/api/products");
-    //         setProducts(data);
-    //     };
-    //     fetchProducts();
-    // }, []);
+const ProductsByCategory = () => {
     const dispatch = useDispatch();
     const params = useParams();
-    const keyword = params.keyword;
+    const category = params.category;
     const pageNumber = params.pageNumber || 1;
-    const productList = useSelector((state) => state.productList);
-    const { loading, error, products, page, pages } = productList;
+    const productListCategory = useSelector(
+        (state) => state.productListCategory
+    );
+    const { loading, error, products, page, pages } = productListCategory;
     useEffect(() => {
-        dispatch(listProducts(keyword, pageNumber));
-    }, [dispatch, keyword, pageNumber]);
+        dispatch(listProductsCategory(category, pageNumber));
+    }, [dispatch, category, pageNumber]);
 
-    console.log(keyword);
+    console.log(category);
     return (
         <div>
-            {!keyword && <ProductCarousel />}
+            <h2 className='my-3'>PRODUCTS</h2>
             <CategorySelector />
-
-            <h2 className='my-3'>ALL PRODUCTS</h2>
             {loading ? (
                 <Loader />
             ) : error ? (
@@ -58,7 +45,7 @@ const HomeScreen = () => {
                     <Paginate
                         page={page}
                         pages={pages}
-                        keyword={keyword ? keyword : ""}
+                        category={category ? category : ""}
                     />
                 </>
             )}
@@ -66,4 +53,4 @@ const HomeScreen = () => {
     );
 };
 
-export default HomeScreen;
+export default ProductsByCategory;
