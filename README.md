@@ -43,8 +43,10 @@ This is my personal MERN Project
 <blockquote>
   #Run frontend + backend<br>
   npm run dev<br>
+  <br>
   #Run backend only<br>
   npm run server<br>
+  <br>
   #Run frontend only<br>
   npm run client<br>
 </blockquote>
@@ -55,6 +57,7 @@ This is my personal MERN Project
 <blockquote>
   #Import data<br>
   npm run data:import<br>
+  <br>
   #Destroy data<br>
   npm run data:destroy<br>
 </blockquote>
