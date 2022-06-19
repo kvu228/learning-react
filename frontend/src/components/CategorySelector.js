@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Dropdown } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,8 +16,6 @@ const CategorySelector = () => {
             dispatch(listCategories());
         }
     }, [dispatch, success]);
-
-    console.log(categories.map((x) => x + 1));
 
     return (
         <Dropdown className='my-3'>
