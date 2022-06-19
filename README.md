@@ -14,7 +14,7 @@ This is my personal MERN Project
   <li>User profile and orders</li>
   <li>Admin Functions</li>
   <li>Marked at Delivered</li>
-  <li>Place Order and Pay with PauPal</li>
+  <li>Place Order and Pay with PayPal</li>
   <li>Data seeder</li>
 </ul>
 
@@ -26,7 +26,7 @@ This is my personal MERN Project
   <p>PORT = 5000</p>
   <p>MONGO_URI = Put you Mongo_URI here</p>
   <p>JWT_SECRET = 123abc</p>
-  <p>PAYPAL_CLIENT_ID = put you PayPalID here</p>
+  <p>PAYPAL_CLIENT_ID = Put you PayPalID here</p>
 </blockquote>
 <hr>
 
